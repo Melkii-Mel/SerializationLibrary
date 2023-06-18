@@ -1,32 +1,27 @@
-﻿namespace Serialization
+﻿using Serialization;
+using SerializationLibrary.Local;
+using System.Xml.Serialization;
+
+namespace SerializationLibrary
 {
     [Serializable]
     public abstract class Serializable<T> : IMySerializable where T : Serializable<T>, new()
     {
-        private static Serializable<T>? _instance;
-        public static T Instance
+        private int index;
+        internal static T Create(int index, SerializationDeserializationController controller)
         {
-            get
+            Serializable<T> result = new T
             {
-                _instance ??= new T();
-                _instance = SerializationDeserializationController.AddToController((T)_instance);
-                return (T)_instance;
-            }
-            set
-            {
-                _instance = value;
-            }
+                index = index
+            };
+            result = controller.AddToController(result);
+            return (T)result;
         }
-
         public string FileName
         {
             get
             {
-                if (_instance == null)
-                {
-                    throw new Exception("Stupid developer exception");
-                }
-                return _instance.GetType().ToString();
+                return $"{GetType()}{index}";
             }
         }
     }

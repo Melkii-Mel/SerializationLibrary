@@ -1,0 +1,12 @@
+D:\Project#.cringe\SerializationLibrary\bin\Debug\net7.0\SerializationLibrary.deps.json
+D:\Project#.cringe\SerializationLibrary\bin\Debug\net7.0\SerializationLibrary.dll
+D:\Project#.cringe\SerializationLibrary\bin\Debug\net7.0\SerializationLibrary.pdb
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\SerializationLibrary.csproj.AssemblyReference.cache
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\SerializationLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\SerializationLibrary.AssemblyInfoInputs.cache
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\SerializationLibrary.AssemblyInfo.cs
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\SerializationLibrary.csproj.CoreCompileInputs.cache
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\SerializationLibrary.dll
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\refint\SerializationLibrary.dll
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\SerializationLibrary.pdb
+D:\Project#.cringe\SerializationLibrary\obj\Debug\net7.0\ref\SerializationLibrary.dll

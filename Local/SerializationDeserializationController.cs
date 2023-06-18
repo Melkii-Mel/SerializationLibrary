@@ -1,39 +1,43 @@
-﻿namespace Serialization
+﻿using SerializationLibrary;
+using SerializationLibrary.Local;
+
+namespace Serialization
 {
-    public class SerializationDeserializationController
+    internal class SerializationDeserializationController
     {
         private readonly bool _runningCondition;
+        private readonly float _delayS;
+        private readonly string _folderPath;
         private static readonly List<IMySerializable> _serializables = new();
         private static readonly MySerializer _mySerializer = new();
-        private static float _delayS;
-        /// <summary>
-        /// 
-        /// </summary>
+        
         /// <param name="runningCondition">While runningCondition is set to true, autoserializing will be working</param>
         /// <param name="delayS">Delay of serialization triggering</param>
-        public SerializationDeserializationController(ref bool runningCondition, float delayS)
+        /// <param name="folderPath">Path to a folder where serialized data will be contained</param>
+        public SerializationDeserializationController(string folderPath, ref bool runningCondition, float delayS)
         {
             _runningCondition = runningCondition;
             _delayS = delayS;
+            _folderPath = folderPath;
             StartAutoSaving();
         }
         /// <summary>
         /// Adds the IGameStats object to a controller and returns a deserialized object.
         /// </summary>
-        public static T AddToController<T>(T gameStats) where T : Serializable<T>, new()
+        public Serializable<T> AddToController<T>(Serializable<T> gameStats) where T : Serializable<T>, new()
         {
-            gameStats = MySerializer.Deserialize(gameStats, typeof(T));
+            gameStats = _mySerializer.Deserialize(_folderPath, gameStats, typeof(T));
             _serializables.Add(gameStats);
             return gameStats;
         }
         /// <summary>
         /// Serializes all objects in _serializables List
         /// </summary>
-        private static void SerializeAll()
+        internal void SerializeAll()
         {
             foreach (var gameStats in _serializables)
             {
-                MySerializer.Serialize(gameStats, gameStats.GetType());
+                _mySerializer.Serialize(_folderPath, gameStats, gameStats.GetType());
             }
         }
         /// <summary>
