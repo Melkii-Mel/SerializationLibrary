@@ -1,5 +1,7 @@
 ﻿namespace SerializationLibrary.Local
 {
+    using System.Text;
+    using System.Xml;
     using System.Xml.Serialization;
 
     internal class MySerializer
@@ -16,7 +18,8 @@
                 {
                     XmlSerializer serializer = new(type);
                     using FileStream fileStream = new(Path.Combine(path, $"{obj.FileName}.mvsave"), FileMode.Create);
-                    serializer.Serialize(fileStream, obj);
+                    using XmlWriter xmlWriter = XmlWriter.Create(fileStream);
+                    serializer.Serialize(xmlWriter, obj);
                     return;
                 }
                 catch (Exception exc)
