@@ -14,7 +14,7 @@ namespace Serialization
         /// <param name="runningCondition">While runningCondition is set to true, autoserializing will be working</param>
         /// <param name="delayS">Delay of serialization triggering</param>
         /// <param name="folderPath">Path to a folder where serialized data will be contained</param>
-        public SerializationDeserializationController(string folderPath, ref bool runningCondition, float delayS)
+        public SerializationDeserializationController(string folderPath, in bool runningCondition, float delayS)
         {
             _runningCondition = runningCondition;
             _delayS = delayS;
