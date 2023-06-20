@@ -1,0 +1,5 @@
+D:\Project#.cringe\SerializationLibrary\obj\Release\net5.0.0\SerializationLibrary.csproj.AssemblyReference.cache
+D:\Project#.cringe\SerializationLibrary\obj\Release\net5.0.0\SerializationLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project#.cringe\SerializationLibrary\obj\Release\net5.0.0\SerializationLibrary.AssemblyInfoInputs.cache
+D:\Project#.cringe\SerializationLibrary\obj\Release\net5.0.0\SerializationLibrary.AssemblyInfo.cs
+D:\Project#.cringe\SerializationLibrary\obj\Release\net5.0.0\SerializationLibrary.csproj.CoreCompileInputs.cache
