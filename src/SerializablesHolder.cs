@@ -1,7 +1,7 @@
-﻿using Serialization.src.Local;
+﻿using SerializationLibrary.Local;
 using System;
 
-namespace Serialization.src
+namespace SerializationLibrary
 {
     public abstract class SerializablesHolder
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Serialization.src.Local
+namespace SerializationLibrary.Local
 {
     internal class SerializationDeserializationController
     {
@@ -29,6 +29,7 @@ namespace Serialization.src.Local
             _folderPath = folderPath;
             _isRunning = isRunning;
             _delayS = delayS;
+            StartAutoSaving();
         }
         /// <summary>
         /// Adds the IGameStats object to a controller and returns a deserialized object.
@@ -44,9 +45,9 @@ namespace Serialization.src.Local
         /// </summary>
         internal void SerializeAll()
         {
-            foreach (var gameStats in _serializables)
+            foreach (var serializable in _serializables)
             {
-                _mySerializer.Serialize(_folderPath, gameStats, gameStats.GetType());
+                _mySerializer.Serialize(_folderPath, serializable, serializable.GetType());
             }
         }
         /// <summary>

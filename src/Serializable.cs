@@ -1,8 +1,8 @@
-﻿using Serialization.src.Local;
+﻿using SerializationLibrary.Local;
 using System;
-using System.Xml.Serialization;
+using System.Reflection;
 
-namespace Serialization.src
+namespace SerializationLibrary
 {
     [Serializable]
     public abstract class Serializable<T> : IMySerializable where T : Serializable<T>, new()
@@ -12,7 +12,7 @@ namespace Serialization.src
         {
             Serializable<T> result = new T
             {
-                index = index
+                index = index,
             };
             result = controller.AddToController(result);
             return (T)result;

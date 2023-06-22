@@ -1,4 +1,4 @@
-﻿namespace Serialization.src.Local
+﻿namespace SerializationLibrary.Local
 {
     internal interface IMySerializable
     {
