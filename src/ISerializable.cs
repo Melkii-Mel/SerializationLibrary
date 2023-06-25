@@ -1,6 +1,6 @@
 ﻿namespace SerializationLibrary.Local
 {
-    internal interface IMySerializable
+    public interface ISerializable
     {
         public string FileName { get; }
     }

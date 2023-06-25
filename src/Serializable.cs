@@ -5,7 +5,7 @@ using System.Reflection;
 namespace SerializationLibrary
 {
     [Serializable]
-    public abstract class Serializable<T> : IMySerializable where T : Serializable<T>, new()
+    public abstract class Serializable<T> : ISerializable where T : Serializable<T>, new()
     {
         private int index;
         internal static T Create(int index, SerializationDeserializationController controller)

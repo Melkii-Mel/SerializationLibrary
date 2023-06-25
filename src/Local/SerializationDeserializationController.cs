@@ -10,7 +10,7 @@ namespace SerializationLibrary.Local
         private readonly Func<bool>? _isRunning;
         private readonly float _delayS;
         private readonly string _folderPath;
-        private readonly List<IMySerializable> _serializables = new List<IMySerializable>();
+        private readonly List<ISerializable> _serializables = new List<ISerializable>();
         private readonly MySerializer _mySerializer = new MySerializer();
 
         /// <param name="runningCondition">While runningCondition is set to true, autoserializing will be working</param>

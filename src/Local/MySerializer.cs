@@ -10,7 +10,7 @@
         /// Serializes an IMySerializable object
         /// </summary>
         /// <param name="obj"> IMySerializable object that will be serialized </param>
-        public void Serialize<T>(string path, T obj, Type type) where T : IMySerializable
+        public void Serialize<T>(string path, T obj, Type type) where T : ISerializable
         {
             while (true)
             {
@@ -35,7 +35,7 @@
         /// </summary>
         /// <param name="obj"> IMySerializable object that is going to be deserialized </param>
         /// <returns>Deserialized object</returns>
-        public T Deserialize<T>(string path, T obj, Type type) where T : class, IMySerializable
+        public T Deserialize<T>(string path, T obj, Type type) where T : class, ISerializable
         {
             try
             {
