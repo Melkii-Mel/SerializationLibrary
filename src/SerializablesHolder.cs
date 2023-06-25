@@ -5,8 +5,8 @@ namespace SerializationLibrary
 {
     public abstract class SerializablesHolder
     {
-        private readonly int index;
-        private readonly SerializationDeserializationController serializationDeserializationController;
+        protected readonly int index;
+        private protected readonly SerializationDeserializationController serializationDeserializationController;
         public SerializablesHolder(int serializablesIndex, in bool runningCondition, float delayS, string path, params Action[] serializationTriggers)
         {
             serializationDeserializationController = new SerializationDeserializationController(path, in runningCondition, delayS);
@@ -22,6 +22,10 @@ namespace SerializationLibrary
         public T CreateSerializable<T>() where T : Serializable<T>, new()
         {
             return Serializable<T>.Create(index, serializationDeserializationController);
+        }
+        public T ResetSerializable<T>() where T : Serializable<T>, new()
+        {
+            return Serializable<T>.CreateEmpty(index, serializationDeserializationController);
         }
         public void SerializeAll()
         {

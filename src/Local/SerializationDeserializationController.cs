@@ -10,8 +10,8 @@ namespace SerializationLibrary.Local
         private readonly Func<bool>? _isRunning;
         private readonly float _delayS;
         private readonly string _folderPath;
-        private static readonly List<IMySerializable> _serializables = new List<IMySerializable>();
-        private static readonly MySerializer _mySerializer = new MySerializer();
+        private readonly List<IMySerializable> _serializables = new List<IMySerializable>();
+        private readonly MySerializer _mySerializer = new MySerializer();
 
         /// <param name="runningCondition">While runningCondition is set to true, autoserializing will be working</param>
         /// <param name="delayS">Delay of serialization triggering</param>
@@ -34,9 +34,16 @@ namespace SerializationLibrary.Local
         /// <summary>
         /// Adds the IGameStats object to a controller and returns a deserialized object.
         /// </summary>
-        public Serializable<T> AddToController<T>(Serializable<T> gameStats) where T : Serializable<T>, new()
+        public Serializable<T> AddToController<T>(Serializable<T> gameStats, bool deserialize = true) where T : Serializable<T>, new()
         {
-            gameStats = _mySerializer.Deserialize(_folderPath, gameStats, typeof(T));
+            if (deserialize)
+            {
+                gameStats = _mySerializer.Deserialize(_folderPath, gameStats, typeof(T));
+            }
+            else
+            {
+                _mySerializer.Serialize(_folderPath, gameStats, typeof(T));
+            }
             _serializables.Add(gameStats);
             return gameStats;
         }
