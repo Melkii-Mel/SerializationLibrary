@@ -7,16 +7,19 @@ namespace SerializationLibrary
     {
         protected readonly int index;
         private protected readonly SerializationDeserializationController serializationDeserializationController;
+        public bool Encrypt { get; private set; }
 
-        public SerializablesHolder(int serializablesIndex, in bool runningCondition, float delayS, string path, params Action[] serializationTriggers)
+        public SerializablesHolder(int serializablesIndex, in bool runningCondition, float delayS, string path, bool encrypt = false, params Action[] serializationTriggers)
         {
+            Encrypt = encrypt;
             serializationDeserializationController = new SerializationDeserializationController(path, in runningCondition, delayS);
             index = serializablesIndex;
             AddSerializationsToActions(serializationTriggers);
         }
         
-        public SerializablesHolder(int serializablesIndex, Func<bool> isRunning, float delayS, string path, params Action[] serializationTriggers)
+        public SerializablesHolder(int serializablesIndex, Func<bool> isRunning, float delayS, string path, bool encrypt = false, params Action[] serializationTriggers)
         {
+            Encrypt = encrypt;
             serializationDeserializationController = new SerializationDeserializationController(path, isRunning, delayS);
             index = serializablesIndex;
             AddSerializationsToActions(serializationTriggers);
@@ -24,12 +27,12 @@ namespace SerializationLibrary
         
         public T CreateSerializable<T>() where T : Serializable<T>, new()
         {
-            return Serializable<T>.Create(index, serializationDeserializationController);
+            return Serializable<T>.Create(index, serializationDeserializationController, Encrypt);
         }
         
         public T ResetSerializable<T>() where T : Serializable<T>, new()
         {
-            return Serializable<T>.CreateEmpty(index, serializationDeserializationController);
+            return Serializable<T>.CreateEmpty(index, serializationDeserializationController, Encrypt);
         }
         
         public void SerializeAll()
