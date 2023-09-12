@@ -18,7 +18,7 @@ namespace SerializationLibrary
                 index = index,
                 _decrypt = decrypt,
             };
-            result = controller.AddToController(result);
+            result = controller.AddToController(result, decrypt: decrypt);
             return (T)result;
         }
         internal static T CreateEmpty(int index, SerializationDeserializationController controller, bool decrypt = false)
@@ -28,7 +28,7 @@ namespace SerializationLibrary
                 index = index,
                 _decrypt = decrypt,
             };
-            result = controller.AddToController(result, deserialize: false);
+            result = controller.AddToController(result, deserialize: false, decrypt: decrypt);
             return (T)result;
         }
         public string FileName
