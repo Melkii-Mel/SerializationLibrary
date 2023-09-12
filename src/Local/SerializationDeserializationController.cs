@@ -34,15 +34,15 @@ namespace SerializationLibrary.Local
         /// <summary>
         /// Adds the IGameStats object to a controller and returns a deserialized object.
         /// </summary>
-        public Serializable<T> AddToController<T>(Serializable<T> gameStats, bool deserialize = true) where T : Serializable<T>, new()
+        public Serializable<T> AddToController<T>(Serializable<T> gameStats, bool deserialize = true, bool decrypt = false) where T : Serializable<T>, new()
         {
             if (deserialize)
             {
-                gameStats = _mySerializer.Deserialize(_folderPath, gameStats, typeof(T));
+                gameStats = _mySerializer.Deserialize(_folderPath, gameStats, typeof(T), decrypt);
             }
             else
             {
-                _mySerializer.Serialize(_folderPath, gameStats, typeof(T));
+                _mySerializer.Serialize(_folderPath, gameStats, typeof(T), decrypt);
             }
             _serializables.Add(gameStats);
             return gameStats;
