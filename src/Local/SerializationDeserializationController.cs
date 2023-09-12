@@ -54,7 +54,7 @@ namespace SerializationLibrary.Local
         {
             foreach (var serializable in _serializables)
             {
-                _mySerializer.Serialize(_folderPath, serializable, serializable.GetType());
+                _mySerializer.Serialize(_folderPath, serializable, serializable.GetType(), serializable.Decrypt);
             }
         }
         /// <summary>
