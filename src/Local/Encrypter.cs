@@ -46,7 +46,7 @@ namespace Serialization.src.Local
         {
             Aes aes = Aes.Create();
             CryptoStream cryptoStream = new CryptoStream(
-                fileStream, aes.CreateEncryptor(_currentKey, DefaultIV), CryptoStreamMode.Read);
+                fileStream, aes.CreateDecryptor(_currentKey, DefaultIV), CryptoStreamMode.Read);
             return cryptoStream;
         }
     }

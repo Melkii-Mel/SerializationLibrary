@@ -4,6 +4,6 @@
     {
         public string FileName { get; }
 
-        internal bool Decrypt { get; }
+        internal bool Decrypt { get; set; }
     }
 }

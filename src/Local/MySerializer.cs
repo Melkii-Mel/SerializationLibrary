@@ -51,7 +51,12 @@
                 {
                     result = (T?)serializer.Deserialize(fileStream);
                 }
-                return result ?? throw new Exception("Deserialization Failed");
+                if (result == null)
+                {
+                    throw new Exception("Deserialization Failed");
+                }
+                result.Decrypt = decrypt;
+                return result;
             }
             catch
             {

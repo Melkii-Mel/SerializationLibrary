@@ -7,7 +7,7 @@ namespace SerializationLibrary
     {
         protected readonly int index;
         private protected readonly SerializationDeserializationController serializationDeserializationController;
-        public bool Encrypt { get; private set; }
+        public bool Encrypt { get; internal set; }
 
         public SerializablesHolder(int serializablesIndex, in bool runningCondition, float delayS, string path, bool encrypt = false, params Action[] serializationTriggers)
         {
@@ -43,14 +43,6 @@ namespace SerializationLibrary
         public void AddSerializationTrigger(Action action)
         {
             action += SerializeAll;
-        }
-        
-        /// <summary>
-        /// enables or disables encryption for data safety. by default encryption is off
-        /// </summary>
-        public void SetEncryptionActive(bool active)
-        {
-            throw new NotImplementedException();
         }
         
         private void AddSerializationsToActions(Action[] actions)

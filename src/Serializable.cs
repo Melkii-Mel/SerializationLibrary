@@ -10,7 +10,11 @@ namespace SerializationLibrary
     {
         private int index;
         private bool _decrypt;
-        bool ISerializable.Decrypt => _decrypt;
+        bool ISerializable.Decrypt
+        {
+            get { return _decrypt; }
+            set { _decrypt = value; }
+        }
         internal static T Create(int index, SerializationDeserializationController controller, bool decrypt = false)
         {
             Serializable<T> result = new T
