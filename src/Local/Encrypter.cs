@@ -34,20 +34,20 @@ namespace Serialization.src.Local
             _currentKey = key;
         }
 
-        public Stream CreateEncryptionStream(Stream fileStream)
+        public CryptoStream CreateEncryptionStream(FileStream fileStream)
         {
             using Aes aes = Aes.Create();
-            using CryptoStream cryptStream = new CryptoStream(
+            CryptoStream cryptoStream = new CryptoStream(
                 fileStream, aes.CreateEncryptor(_currentKey, DefaultIV), CryptoStreamMode.Write);
-            return cryptStream;
+            return cryptoStream;
         }
 
-        public Stream CreateDecryptionStream(Stream fileStream)
+        public CryptoStream CreateDecryptionStream(FileStream fileStream)
         {
             Aes aes = Aes.Create();
-            CryptoStream cryptStream = new CryptoStream(
+            CryptoStream cryptoStream = new CryptoStream(
                 fileStream, aes.CreateEncryptor(_currentKey, DefaultIV), CryptoStreamMode.Read);
-            return cryptStream;
+            return cryptoStream;
         }
     }
 }

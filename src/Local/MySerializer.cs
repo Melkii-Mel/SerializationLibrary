@@ -3,6 +3,7 @@
     using Serialization.src.Local;
     using System;
     using System.IO;
+    using System.Security.Cryptography;
     using System.Xml.Serialization;
 
     internal class MySerializer
@@ -15,32 +16,19 @@
         /// <param name="obj"> IMySerializable object that will be serialized </param>
         public void Serialize<T>(string path, T obj, Type type, bool encrypt) where T : ISerializable
         {
-            while (true)
+            XmlSerializer serializer = new XmlSerializer(type);
+            using FileStream fileStream = new FileStream(Path.Combine(path, $"{obj.FileName}.mvsave"), FileMode.Create);
+
+            if (encrypt)
             {
-                try
-                {
-                    XmlSerializer serializer = new XmlSerializer(type);
-                    using FileStream fileStream = new FileStream(Path.Combine(path, $"{obj.FileName}.mvsave"), FileMode.Create);
-                    
-                    if (encrypt)
-                    {
-                        Stream encryptionStream = encrypter.CreateEncryptionStream(fileStream);
-                        serializer.Serialize(encryptionStream, obj);
-                    }
-                    else
-                    {
-                        serializer.Serialize(fileStream, obj);
-                    }
-                    return;
-                }
-                catch (Exception exc)
-                {
-                    if (exc.GetType() == typeof(InvalidOperationException))
-                    {
-                        throw;
-                    }
-                }
+                using CryptoStream encryptionStream = encrypter.CreateEncryptionStream(fileStream);
+                serializer.Serialize(encryptionStream, obj);
             }
+            else
+            {
+                serializer.Serialize(fileStream, obj);
+            }
+            return;
         }
         /// <summary>
         /// Takes an object and returns a new object that is deseralized
@@ -56,7 +44,7 @@
                 T? result;
                 if (decrypt)
                 {
-                    Stream decryptionStream = encrypter.CreateDecryptionStream(fileStream);
+                    using CryptoStream decryptionStream = encrypter.CreateDecryptionStream(fileStream);
                     result = (T?)serializer.Deserialize(decryptionStream);
                 }
                 else
